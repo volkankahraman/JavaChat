@@ -44,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Üyelik");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        
+
 
 
         username = findViewById(R.id.username);
@@ -75,6 +75,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void Register(final String username, String email, String password) {
+        btnRegister.setEnabled(false);
         auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {

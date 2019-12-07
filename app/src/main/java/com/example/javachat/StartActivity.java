@@ -23,13 +23,13 @@ public class StartActivity extends AppCompatActivity {
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
         super.onStart();
 
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+    }
 
-        if (firebaseUser != null){
-            Intent intent = new Intent(StartActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
-        }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        login.setEnabled(true);
+        register.setEnabled(true);
     }
 
     @Override
@@ -37,15 +37,26 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (firebaseUser != null){
+            Intent intent = new Intent(StartActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
 
         login = findViewById(R.id.login);
         register = findViewById(R.id.register);
 
 
         login.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+                login.setEnabled(false);
                 startActivity(new Intent(StartActivity.this, LoginActivity.class));
+
             }
         });
 
@@ -53,7 +64,9 @@ public class StartActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                register.setEnabled(false);
                 startActivity(new Intent(StartActivity.this, RegisterActivity.class));
+
             }
         });
     }
