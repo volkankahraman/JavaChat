@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "200143433139",
+    "firebase_url": "https://javachat-2adf1.firebaseio.com",
+    "project_id": "javachat-2adf1",
+    "storage_bucket": "javachat-2adf1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:200143433139:android:eb4d8ae1af11818d70afc6",
+        "android_client_info": {
+          "package_name": "com.example.javachat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "200143433139-k3lhjbg7kl2tomfaibetplfgmqa2vrcp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.javachat",
+            "certificate_hash": "13f28c2b7b02f7d3e9eebaec2542b65ed5550077"
+          }
+        },
+        {
+          "client_id": "200143433139-smdkur67i0au4tfnss85ul073p1ivfml.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQ93WqH1GtqIL7YYBWIO20ttEgaLg5zJQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "200143433139-smdkur67i0au4tfnss85ul073p1ivfml.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
