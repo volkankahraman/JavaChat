@@ -21,7 +21,6 @@ import java.util.List;
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     private Context mContext;
     private List<User> mUsers;
-    private boolean isChatOpennable = true;
 
     public UserAdapter(Context mContext, List<User> mUsers){
         this.mUsers = mUsers;
@@ -49,13 +48,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isChatOpennable){
-                    isChatOpennable= false;
                     Intent intent = new Intent(mContext, MessageActivity.class);
                     intent.putExtra("userid", user.getId());
                     mContext.startActivity(intent);
-                    
-                }
 
             }
         });

@@ -12,8 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.javachat.Adapter.UserAdapter;
+import com.example.javachat.MessageActivity;
 import com.example.javachat.Model.Chat;
 import com.example.javachat.Model.User;
 import com.example.javachat.R;
@@ -26,19 +28,23 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
 public class ChatsFragment extends Fragment {
     private RecyclerView recyclerView;
 
+
     private UserAdapter userAdapter;
     private List<User> mUsers;
+    private List<User> mAllUsers;
 
     FirebaseUser firebaseUser;
     DatabaseReference reference;
 
     private List<String> usersList;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -85,34 +91,44 @@ public class ChatsFragment extends Fragment {
     }
 
     private void readChats() {
+        mAllUsers = new ArrayList<>();
         mUsers = new ArrayList<>();
-
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 mUsers.clear();
-
+                // Burda saçma bi olay var direkt Userların listesini alamıyorum
+                // O yüzden bütün userları bir listeye aktarıp
+                // senin algoritmayı kullanıyorum
                 for (DataSnapshot snapshot: dataSnapshot.getChildren()){
 
                     User user = snapshot.getValue(User.class);
-                    // Display 1 user from chats
+                    Collections.sort(usersList);
+
+                    // Tüm mesajların userlarını çekiyor
                     for (String id: usersList){
                         if(user.getId().equals(id)){
-                            if (mUsers.size() != 0){
-                                for (User user1 :mUsers){
-                                    if (!user.getId().equals(user1.getId())){
-                                        mUsers.add(user);
-                                    }
-                                }
-                            }else{
-                                mUsers.add(user);
-                            }
+                            mAllUsers.add(user);
                         }
                     }
-                }
 
+                    // Senin kodun implementasyonu
+                    int x=0;
+                    mUsers.clear();
+                    for(User user1: mAllUsers){
+                        if(x==0)
+                            mUsers.add(mAllUsers.get(x));
+                        else{
+                            if(mAllUsers.get(x - 1) != mAllUsers.get(x))
+                               mUsers.add(mAllUsers.get(x));
+                        }
+                        x++;
+                    }
+                }
+                //mUsers adapter yoluyla arayüze göneriliyor
                 userAdapter = new UserAdapter(getContext(), mUsers);
                 recyclerView.setAdapter(userAdapter);
             }
